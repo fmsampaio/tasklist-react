@@ -1,0 +1,20 @@
+.card {
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+    border : 1px solid gray;
+    border-radius: 5px;
+    margin-bottom: 0.6em;
+    width: 100%;
+    display : flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card_text {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.card_action_item {
+    margin-right: 1em;
+}

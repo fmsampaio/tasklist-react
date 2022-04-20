@@ -31,7 +31,7 @@ function MainPage() {
         .then((data) => {
             console.log('Task criada!')
             const updatedTasks = tasks
-            tasks.push(data)
+            updatedTasks.push(data)
             setTasks(updatedTasks)
             setShowTaskForm(false)
         })

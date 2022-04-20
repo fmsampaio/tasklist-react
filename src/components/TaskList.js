@@ -1,4 +1,5 @@
 import styles from './TaskList.module.css'
+import TaskCard from './TaskCard'
 
 function TaskList( {tasks} ) {
     return (
@@ -6,11 +7,12 @@ function TaskList( {tasks} ) {
             {tasks.length === 0 ? (
                 <p>No tasks found</p>
             ) : (
-                <div>
-                    {tasks.map( (task) => (
-                        <p>{task.description}</p>
-                    ))}
-                </div>
+                <>
+                {tasks.map( (task) => (
+                    <TaskCard key={task.id} task={task}/>
+                ))}
+                </>
+            
             )
             }
         </div>
