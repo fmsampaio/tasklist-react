@@ -1,36 +1,35 @@
 {
-    "tasks" : [
-        {
-           "id" : 1,
-           "description" : "Exemple task",
-           "category" : 1,
-           "due-date" : "2022-05-04",
-           "completed" : false
-        },
-        {
-            "id" : 2,
-            "description" : "Exemple task 2",
-            "category" : 3,
-            "due-date" : "2022-05-23",
-            "completed" : false
-         }
-    ],
-    "categories" : [
-        {
-            "id" : 1,
-            "name" : "My Stuffs"
-        },
-        {
-            "id" : 2,
-            "name" : "CPPI"
-        },
-        {
-            "id" : 3,
-            "name" : "Disc. IFRS"
-        },
-        {
-            "id" : 3,
-            "name" : "Projects"
-        }
-    ]
+  "tasks": [
+    {
+      "due_date": "Thu Apr 21 2022 16:51:58 GMT-0300 (Brasilia Standard Time)",
+      "description": "Descrição da tarefa",
+      "category": 4,
+      "id": 1
+    },
+    {
+      "description": "Preparar aula 1",
+      "category": 1,
+      "completed": false,
+      "due_date": "1650484587475",
+      "id": 2
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "My Stuffs"
+    },
+    {
+      "id": 2,
+      "name": "CPPI"
+    },
+    {
+      "id": 3,
+      "name": "Disc. IFRS"
+    },
+    {
+      "id": 4,
+      "name": "Projects"
+    }
+  ]
 }
