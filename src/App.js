@@ -1,8 +1,12 @@
+
+import { Container } from "@mui/material";
+import Header from "./components/layout/Header";
+
 function App() {
   return (
-    <div>
-      <p>TaskList</p>
-    </div>
+    <Container maxWidth="md">
+      <Header />
+    </Container>
   );
 }
 
