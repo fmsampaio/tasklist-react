@@ -12,6 +12,34 @@
       "completed": false,
       "due_date": "1650484587475",
       "id": 2
+    },
+    {
+      "description": "Lavar roupa",
+      "category": 1,
+      "due_date": "Fri Apr 22 2022 00:00:00 GMT-0300 (Brasilia Standard Time)",
+      "completed": false,
+      "id": 3
+    },
+    {
+      "description": "Ir no super",
+      "category": 1,
+      "completed": false,
+      "due_date": "1650485594652",
+      "id": 4
+    },
+    {
+      "description": "Blablabla",
+      "category": 2,
+      "completed": false,
+      "due_date": "1650485655706",
+      "id": 5
+    },
+    {
+      "description": "Nova task",
+      "category": 1,
+      "due_date": "Sat Apr 30 2022 17:16:07 GMT-0300 (Brasilia Standard Time)",
+      "completed": false,
+      "id": 6
     }
   ],
   "categories": [

@@ -1,12 +1,18 @@
 import { Container } from "@mui/material"
-import { useState } from "react"
-import Header from "./layout/Header"
-import TaskForm from "./task/TaskForm"
+import { useEffect, useState } from "react"
+import Header from "./Header"
+import TaskForm from "./TaskForm"
+import TaskList from "./TaskList"
 
 function MainPage() {
 
     const [showTaskForm, setShowTaskForm] = useState(false)
     const [task, setTask] = useState({})
+    const [tasks, setTasks] = useState([])
+
+    useEffect( () => {
+        fetchTasks()
+    }, [])
 
     function handleNewTaskButton() {
         //toggle new task form
@@ -24,6 +30,24 @@ function MainPage() {
         .then((resp) => resp.json())
         .then((data) => {
             console.log('Task criada!')
+            const updatedTasks = tasks
+            tasks.push(data)
+            setTasks(updatedTasks)
+            setShowTaskForm(false)
+        })
+        .catch((err) => console.log(err))
+    }
+
+    function fetchTasks() {
+        fetch('http://localhost:5000/tasks', {
+            method : "GET",
+            headers : {
+                'Content-Type' : 'application/json'
+            }
+        })
+        .then((resp) => resp.json())
+        .then((data) => {
+            setTasks(data)
         })
         .catch((err) => console.log(err))
     }
@@ -34,6 +58,7 @@ function MainPage() {
             {showTaskForm && (
                 <TaskForm taskData={task} btnText="Save" handleSubmit={createTask}/>
             )}
+            <TaskList tasks={tasks}/>
         </Container>
     )
 }
