@@ -32,7 +32,12 @@ function TaskCard( {task} ) {
     return(
         <div className={styles.card}>
             <div className={styles.card_text}>
-                <Typography variant="body1">{task.description}</Typography>
+                {!completed ? (
+                    <Typography variant="body1">{task.description}</Typography>
+                ) : (
+                    <Typography variant="body1" sx={{textDecoration : "line-through"}}>{task.description}</Typography>
+                )}
+
             </div>
             <div className={styles.card_actions}>
                 <Checkbox
