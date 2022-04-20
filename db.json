@@ -17,7 +17,7 @@
     {
       "description": "Ir no super",
       "category": 1,
-      "completed": false,
+      "completed": true,
       "due_date": "1650485594652",
       "id": 4
     },

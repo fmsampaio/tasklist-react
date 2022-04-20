@@ -11,6 +11,22 @@ function TaskCard( {task} ) {
 
     function onCompletedChange(e) {
         setCompleted(e.target.checked)
+
+        const updatedTask = task
+        updatedTask.completed = e.target.checked
+
+        fetch(`http://localhost:5000/tasks/${updatedTask.id}`, {
+            method : "PATCH",
+            headers : {
+                'Content-type' : 'application/json'
+            },
+            body : JSON.stringify(updatedTask)
+        })
+        .then((resp) => resp.json())
+        .then((data) => {
+
+        })
+        .catch((err) => console.log(err))
     }
 
     return(
