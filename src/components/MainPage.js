@@ -19,6 +19,10 @@ function MainPage() {
         setShowTaskForm(true)
     }
 
+    function toggleForm() {
+        setShowTaskForm(!showTaskForm)
+    }
+
     function createTask(task) {
         fetch('http://localhost:5000/tasks', {
             method : "POST",
@@ -56,7 +60,7 @@ function MainPage() {
         <Container maxWidth="md">
             <Header handleNewTaskButton={handleNewTaskButton} />
             {showTaskForm && (
-                <TaskForm taskData={task} btnText="Save" handleSubmit={createTask}/>
+                <TaskForm taskData={task} btnText="Save" handleSubmit={createTask} toggleForm={toggleForm}/>
             )}
             <TaskList tasks={tasks}/>
         </Container>

@@ -6,7 +6,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import styles from './TaskForm.module.css'
 
-function TaskForm( {handleSubmit, btnText, taskData} ) {
+function TaskForm( {handleSubmit, btnText, taskData, toggleForm} ) {
 
     const [task, setTask] = useState(taskData || {})
     const [categories, setCategories] = useState([])
@@ -105,9 +105,14 @@ function TaskForm( {handleSubmit, btnText, taskData} ) {
                         
                     />
                 </LocalizationProvider>
-                <Button variant="contained" type="submit" sx={{marginTop : "1em", width: "70px"}} >
-                    {btnText}
-                </Button>
+                <div className={styles.actions_container}>
+                    <Button variant="contained" type="submit" sx={{marginTop : "1em", width: "70px"}} >
+                        {btnText}
+                    </Button>
+                    <Button variant="container" color="secondary" sx={{marginTop : "1em", width: "100px"}} onClick={toggleForm} >
+                        Cancelar
+                    </Button>
+                </div>
             </form>
             
         </div>
