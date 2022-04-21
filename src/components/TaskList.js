@@ -1,7 +1,7 @@
 import styles from './TaskList.module.css'
 import TaskCard from './TaskCard'
 
-function TaskList( {tasks} ) {
+function TaskList( {tasks, handleEditForm} ) {
     return (
         <div className={styles.container}>
             {tasks.length === 0 ? (
@@ -9,7 +9,7 @@ function TaskList( {tasks} ) {
             ) : (
                 <>
                 {tasks.map( (task) => (
-                    <TaskCard key={task.id} task={task}/>
+                    <TaskCard key={task.id} task={task} handleEditForm={handleEditForm}/>
                 ))}
                 </>
             

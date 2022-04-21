@@ -8,6 +8,7 @@ import TaskList from "./TaskList"
 function MainPage() {
 
     const [showTaskForm, setShowTaskForm] = useState(false)
+    const [showTaskFormforCreate, setShowTaskFormforCreate] = useState(false)
     const [task, setTask] = useState({})
     const [tasks, setTasks] = useState([])
     const [typeMessage, setTypeMessage] = useState("")
@@ -20,6 +21,7 @@ function MainPage() {
     function handleNewTaskButton() {
         //toggle new task form
         setShowTaskForm(true)
+        setShowTaskFormforCreate(true)
     }
 
     function toggleForm() {
@@ -62,14 +64,25 @@ function MainPage() {
         .catch((err) => console.log(err))
     }
 
+    function handleEditForm(task) {
+        setShowTaskForm(true)
+        setShowTaskFormforCreate(false)
+        setTask(task)
+    }
+
     return (
         <Container maxWidth="md">
             <Header handleNewTaskButton={handleNewTaskButton} />
             <Message type={typeMessage} msg={textMessage} />
             {showTaskForm && (
-                <TaskForm taskData={task} btnText="Save" handleSubmit={createTask} toggleForm={toggleForm}/>
+                showTaskFormforCreate ? (
+                    <TaskForm btnText="Save" handleSubmit={createTask} toggleForm={toggleForm}/>
+                ) : (
+                    <TaskForm taskData={task} btnText="Save" handleSubmit={createTask} toggleForm={toggleForm}/>
+                )
+
             )}
-            <TaskList tasks={tasks}/>
+            <TaskList tasks={tasks} handleEditForm={handleEditForm}/>
         </Container>
     )
 }

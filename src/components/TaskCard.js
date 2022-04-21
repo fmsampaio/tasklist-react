@@ -5,9 +5,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useState } from 'react';
 
-function TaskCard( {task} ) {
+function TaskCard( {task, handleEditForm} ) {
 
     const [completed, setCompleted] = useState(task.completed)
+
+    const edit = (e) => {
+        e.preventDefault()
+        handleEditForm(task)
+    }
 
     function onCompletedChange(e) {
         setCompleted(e.target.checked)
@@ -45,7 +50,7 @@ function TaskCard( {task} ) {
                     checked={completed}
                     onChange={onCompletedChange}
                 />
-                <IconButton color="primary" aria-label="edit" size="large">
+                <IconButton color="primary" aria-label="edit" size="large" onClick={edit}>
                     <EditIcon fontSize="inherit" />
                 </IconButton>
                 <IconButton color="error" aria-label="delete" size="large">
