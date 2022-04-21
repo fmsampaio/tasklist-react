@@ -1,6 +1,7 @@
 import { Container } from "@mui/material"
 import { useEffect, useState } from "react"
 import Header from "./Header"
+import Message from "./Message"
 import TaskForm from "./TaskForm"
 import TaskList from "./TaskList"
 
@@ -9,6 +10,8 @@ function MainPage() {
     const [showTaskForm, setShowTaskForm] = useState(false)
     const [task, setTask] = useState({})
     const [tasks, setTasks] = useState([])
+    const [typeMessage, setTypeMessage] = useState("")
+    const [textMessage, setTextMessage] = useState("")
 
     useEffect( () => {
         fetchTasks()
@@ -24,6 +27,7 @@ function MainPage() {
     }
 
     function createTask(task) {
+        setTextMessage('')
         fetch('http://localhost:5000/tasks', {
             method : "POST",
             headers : {
@@ -38,6 +42,8 @@ function MainPage() {
             updatedTasks.push(data)
             setTasks(updatedTasks)
             setShowTaskForm(false)
+            setTextMessage("Task created successfuly!")
+            setTypeMessage("success")
         })
         .catch((err) => console.log(err))
     }
@@ -59,6 +65,7 @@ function MainPage() {
     return (
         <Container maxWidth="md">
             <Header handleNewTaskButton={handleNewTaskButton} />
+            <Message type={typeMessage} msg={textMessage} />
             {showTaskForm && (
                 <TaskForm taskData={task} btnText="Save" handleSubmit={createTask} toggleForm={toggleForm}/>
             )}
