@@ -16,3 +16,11 @@
 .card_action_item {
     margin-right: 1em;
 }
+
+.completed {
+    background-color: #ffe8e8;
+}
+
+.not_completed {
+    background-color: #e8ffe8;
+}

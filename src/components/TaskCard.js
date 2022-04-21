@@ -30,7 +30,7 @@ function TaskCard( {task} ) {
     }
 
     return(
-        <div className={styles.card}>
+        <div className={ `${styles.card} ${styles[completed ? "completed" : "not_completed"]}`}>
             <div className={styles.card_text}>
                 {!completed ? (
                     <Typography variant="body1">{task.description}</Typography>
