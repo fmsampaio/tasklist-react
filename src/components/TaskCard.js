@@ -1,4 +1,4 @@
-import { Checkbox, IconButton, Typography } from '@mui/material'
+import { Checkbox, Chip, IconButton, Typography } from '@mui/material'
 import styles from './TaskCard.module.css'
 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -34,9 +34,21 @@ function TaskCard( {task, handleEditForm, handleRemoveTask} ) {
         })
         .then((resp) => resp.json())
         .then((data) => {
-
+            
         })
         .catch((err) => console.log(err))
+    }
+
+    function convertDateToStr(dateNum) {
+        const date = new Date(dateNum)
+        const returnable = ((date.getMonth()+1) >= 10) ? `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}` : `${date.getDate()}/0${date.getMonth()+1}/${date.getFullYear()}`
+        return returnable
+    }
+
+    function isOverdueTask() {
+        const dateTask = new Date(task.due_date)
+        const today = new Date()
+        return dateTask < today
     }
 
     return(
@@ -45,9 +57,10 @@ function TaskCard( {task, handleEditForm, handleRemoveTask} ) {
                 {!completed ? (
                     <Typography variant="body1">{task.description}</Typography>
                 ) : (
-                    <Typography variant="body1" sx={{textDecoration : "line-through"}}>{task.description}</Typography>
+                    <Typography variant="body1" sx={{textDecoration : "line-through", paddingBottom : "0"}}>{task.description}</Typography>
                 )}
-
+                <Chip sx={{marginLeft : "1em"}} label={task.category.name}/>
+                <Chip sx={{marginLeft : "1em"}} color={isOverdueTask() ? "error" : "success"} label={convertDateToStr(task.due_date)}/>
             </div>
             <div className={styles.card_actions}>
                 <Checkbox

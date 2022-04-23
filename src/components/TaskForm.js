@@ -60,7 +60,6 @@ function TaskForm( {handleSubmit, btnText, taskData, toggleForm} ) {
 
     function handleDateOnChange(date) {
         
-        console.log(convertDateToStr(date))
         setSelectedDate(date)
         setTask(
             {
@@ -71,10 +70,7 @@ function TaskForm( {handleSubmit, btnText, taskData, toggleForm} ) {
           
     }
 
-    function convertDateToStr(date) {
-        const returnable = ((date.getMonth()+1) >= 10) ? `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}` : `${date.getFullYear()}-0${date.getMonth()+1}-${date.getDate()}`
-        return returnable
-    }
+   
 
     return (
         <div className={styles.container}>

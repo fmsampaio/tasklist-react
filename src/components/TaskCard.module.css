@@ -10,7 +10,12 @@
 
 .card_text {
     margin-left: 1em;
-    margin-right: 1em;
+    display : flex;
+    justify-content: space-between;
+}
+
+.card_text p {
+    padding: 0.3em;
 }
 
 .card_action_item {
