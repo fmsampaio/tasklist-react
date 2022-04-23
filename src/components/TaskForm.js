@@ -10,9 +10,9 @@ function TaskForm( {handleSubmit, btnText, taskData, toggleForm} ) {
 
     const [task, setTask] = useState(taskData || {})
     const [categories, setCategories] = useState([])
-    const [description, setDescription] = useState(task.description ? task.description : '')
-    const [selectedCategory, setSelectedCategory] = useState(task.category ? task.category.id : '')
-    const [selectedDate, setSelectedDate] = useState(task.due_date ? task.due_date : Date.now())
+    const [description, setDescription] = useState(taskData ? taskData.description : '')
+    const [selectedCategory, setSelectedCategory] = useState(taskData ? taskData.category.id : '')
+    const [selectedDate, setSelectedDate] = useState(taskData ? new Date(taskData.due_date) : new Date())
 
     useEffect( () => {
         fetch('http://localhost:5000/categories', {
@@ -28,13 +28,9 @@ function TaskForm( {handleSubmit, btnText, taskData, toggleForm} ) {
         .catch((err) => console.log(err))
     }, [])
 
+
     const submit = (e) => {
         e.preventDefault()
-        task.completed = false
-        if(!task.due_date) {
-            task.due_date = Date.now().toString()
-        }
-
         handleSubmit(task)
     }
 
@@ -45,29 +41,39 @@ function TaskForm( {handleSubmit, btnText, taskData, toggleForm} ) {
                 ...task,
                 description : e.target.value
             }
-        )
-        
+        )        
     }
 
     function handleSelectOnChange(e) {
         setSelectedCategory(e.target.value)
+            
         setTask(
             {
                 ...task,
-                category : e.target.value
+                category : { 
+                    id : e.target.value,
+                    name : categories.filter((cat) => (cat.id === e.target.value))[0].name
+                }
             }
         )
     }
 
     function handleDateOnChange(date) {
-        setSelectedDate(date.toString());
+        
+        console.log(convertDateToStr(date))
+        setSelectedDate(date)
         setTask(
             {
                 ...task,
-                due_date : date.toString()
+                due_date : Date.parse(date)
             }
         )
           
+    }
+
+    function convertDateToStr(date) {
+        const returnable = ((date.getMonth()+1) >= 10) ? `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}` : `${date.getFullYear()}-0${date.getMonth()+1}-${date.getDate()}`
+        return returnable
     }
 
     return (

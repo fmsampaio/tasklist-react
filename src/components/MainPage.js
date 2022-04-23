@@ -39,7 +39,6 @@ function MainPage() {
         })
         .then((resp) => resp.json())
         .then((data) => {
-            console.log('Task criada!')
             const updatedTasks = tasks
             updatedTasks.push(data)
             setTasks(updatedTasks)
@@ -64,6 +63,28 @@ function MainPage() {
         .catch((err) => console.log(err))
     }
 
+    function editTask(task) {
+        setTextMessage('')
+        fetch(`http://localhost:5000/tasks/${task.id}`, {
+            method: "PATCH",
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify(task)
+        })
+        .then((resp) => resp.json())
+        .then((data) => {
+            const updatedTasks = tasks.filter((t) => t.id !== task.id)          
+            updatedTasks.push(data)
+
+            setTasks(updatedTasks)
+            setShowTaskForm(false)
+            setTextMessage('Task editted successfuly')
+            setTypeMessage('success')
+        })
+        .catch((err) => console.log(err))
+    }
+
     function handleEditForm(task) {
         setShowTaskForm(true)
         setShowTaskFormforCreate(false)
@@ -78,7 +99,7 @@ function MainPage() {
                 showTaskFormforCreate ? (
                     <TaskForm btnText="Save" handleSubmit={createTask} toggleForm={toggleForm}/>
                 ) : (
-                    <TaskForm taskData={task} btnText="Save" handleSubmit={createTask} toggleForm={toggleForm}/>
+                    <TaskForm taskData={task} btnText="Edit" handleSubmit={editTask} toggleForm={toggleForm}/>
                 )
 
             )}
