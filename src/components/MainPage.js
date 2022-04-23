@@ -85,6 +85,26 @@ function MainPage() {
         .catch((err) => console.log(err))
     }
 
+    function removeTask(task) {
+        setTextMessage('')
+        fetch(`http://localhost:5000/tasks/${task.id}`, {
+            method: 'DELETE',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify(task)
+        })
+        .then((resp) => resp.json())
+        .then((data) => {
+            const updatedTasks = tasks.filter((t) => t.id !== task.id)
+            setTasks(updatedTasks)
+            setShowTaskForm(false)
+            setTextMessage('Task removed successfuly')
+            setTypeMessage('success')
+        })
+        .catch((err) => console.log(err))
+    }
+
     function handleEditForm(task) {
         setShowTaskForm(true)
         setShowTaskFormforCreate(false)
@@ -103,7 +123,7 @@ function MainPage() {
                 )
 
             )}
-            <TaskList tasks={tasks} handleEditForm={handleEditForm}/>
+            <TaskList tasks={tasks} handleEditForm={handleEditForm} handleRemoveTask={removeTask}/>
         </Container>
     )
 }
