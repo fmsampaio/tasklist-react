@@ -109,6 +109,7 @@ function MainPage() {
         setShowTaskForm(true)
         setShowTaskFormforCreate(false)
         setTask(task)
+        return task
     }
 
     return (
